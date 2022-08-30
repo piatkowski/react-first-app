@@ -1,0 +1,19 @@
+.bgImage {
+    position: relative;
+    background-image: url('../../assets/meals.jpg');
+    background-size: cover;
+}
+
+.bgImage::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0d6efdaa;
+}
+
+.bgImage h2, .bgImage p {
+    position: relative;
+}

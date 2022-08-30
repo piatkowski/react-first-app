@@ -1,0 +1,10 @@
+.quantityInput {
+    display: inline-block;
+    width: 41px;
+    padding-top: 0.3rem;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
+}
