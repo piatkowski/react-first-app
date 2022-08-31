@@ -1,6 +1,5 @@
 import {Modal, Button, ListGroup, Badge} from 'react-bootstrap';
 import CartItem from "./CartItem";
-
 const Cart = props => {
 
     // Sample data from backend API
@@ -23,7 +22,7 @@ const Cart = props => {
         />
     });
 
-    return <Modal show={false} >
+    return <Modal show={props.isShown} onHide={props.onHide}>
         <Modal.Header closeButton>
             <Modal.Title>Cart</Modal.Title>
         </Modal.Header>
@@ -40,7 +39,7 @@ const Cart = props => {
             </div>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="secondary">Close</Button>
+            <Button variant="secondary" onClick={props.onHide}>Close</Button>
             <Button variant="primary">Checkout</Button>
         </Modal.Footer>
     </Modal>
