@@ -1,24 +1,30 @@
 import {Modal, Button, ListGroup, Badge} from 'react-bootstrap';
 import CartItem from "./CartItem";
+import { useContext} from "react";
+import CartContext from "../../store/cart-context";
+
 const Cart = props => {
+    const cartContext = useContext(CartContext);
 
-    // Sample data from backend API
-    const data = [{id: 'c1', name: 'Sushi', amount: 2, price: 12.99}, {
-        id: 'c2',
-        name: 'Cheesburger',
-        amount: 1,
-        price: 22.99
-    }, {id: 'c3', name: 'Salad', amount: 3, price: 2.99}, {id: 'c4', name: 'Breakfast', amount: 1, price: 5.99}];
+    const totalAmount = `$${cartContext.totalAmount.toFixed(2)}`;
+    const hasItems = cartContext.items.length > 0;
 
-    let totalAmount = 0;
+    const cartItemRemoveHandler = id => {
+        cartContext.removeItem(id);
+    };
 
-    const cartItems = data.map(item => {
-        totalAmount += item.amount * item.price;
+    const cartItemAddHandler = item => {
+        cartContext.addItem({...item, amount: 1});
+    };
+
+    const cartItems = cartContext.items.map(item => {
         return <CartItem
             key={item.id}
             name={item.name}
             amount={item.amount}
             price={item.price}
+            onRemove={cartItemRemoveHandler.bind(null, item.id)}
+            onAdd={cartItemAddHandler.bind(null, item)}
         />
     });
 
@@ -29,18 +35,19 @@ const Cart = props => {
         <Modal.Body>
             <ListGroup>
                 {cartItems}
+                {!hasItems && <p className="text-center">Your cart is empty!</p>}
             </ListGroup>
-            <div className="text-end mt-3">
+            {hasItems && <div className="text-end mt-3">
                 <span className="h4">
                     <Badge bg="success" pill>
-                        Total: $ {totalAmount.toFixed(2)}
+                        Total: {totalAmount}
                     </Badge>
                  </span>
-            </div>
+            </div>}
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" onClick={props.onHide}>Close</Button>
-            <Button variant="primary">Checkout</Button>
+            {hasItems && <Button variant="primary" onClick={alert.bind(null, 'Checkout')}>Checkout</Button>}
         </Modal.Footer>
     </Modal>
 };

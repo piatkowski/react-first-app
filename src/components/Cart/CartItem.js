@@ -1,4 +1,4 @@
-import {ListGroup, Badge} from "react-bootstrap";
+import {Button, ListGroup, Badge} from "react-bootstrap";
 
 
 const CartItem = props => {
@@ -13,7 +13,8 @@ const CartItem = props => {
                 $ {totalPrice.toFixed(2)}
             </Badge>
         </span>
-
+        <Button variant="outline-dark" size="sm" onClick={props.onRemove}>-</Button>
+        <Button variant="outline-dark" size="sm"  onClick={props.onAdd}>+</Button>
     </ListGroup.Item>
 };
 

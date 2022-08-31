@@ -1,8 +1,8 @@
 import {Button, Form} from "react-bootstrap";
 import classes from './QuantityInput.module.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const QuantityInput = (props) => {
+const QuantityInput = React.forwardRef((props, ref) => {
     const [qtyValue, setQtyValue] = useState(1);
 
     const qtyIncrement = () => {
@@ -17,11 +17,11 @@ const QuantityInput = (props) => {
 
     return (
         <div className="mb-1">
-            <Button variant="danger" onClick={qtyDecrement}>-</Button>
-            <Form.Control className={classes.quantityInput} type="number" {...props.input} value={qtyValue} readOnly />
-            <Button variant="success" onClick={qtyIncrement}>+</Button>
+            <Button variant="outline-primary" size="sm" onClick={qtyDecrement}>-</Button>
+            <Form.Control ref={ref} className={classes.quantityInput} type="number" {...props.input} value={qtyValue} readOnly />
+            <Button variant="outline-primary" size="sm" onClick={qtyIncrement}>+</Button>
         </div>
     );
-};
+});
 
 export default QuantityInput;
